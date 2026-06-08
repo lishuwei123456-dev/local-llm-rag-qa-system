@@ -4,7 +4,9 @@
 
 ## 项目背景
 
-该项目根据个人简历中的“基于本地大模型与 RAG 的智能问答系统开发”经历重建，重点展示从资料接入到检索增强生成的完整闭环：
+在知识库问答场景中，单纯依赖大模型参数知识容易出现依据不足、信息过期和不可追溯的问题。RAG（Retrieval-Augmented Generation）通过在回答前检索外部知识片段，并将检索结果注入提示词，可以提升回答的准确性、可解释性和来源可追溯性。
+
+本项目聚焦本地大模型与私有知识库问答，重点展示从资料接入到检索增强生成的完整闭环：
 
 - 使用 Ollama 部署本地 Qwen 模型。
 - 使用 LangChain 思路组织文档加载、切分、检索和生成流程。
@@ -21,6 +23,10 @@
 - RAG 回答、普通回答和检索来源片段同时返回。
 - Gradio Web 页面和命令行入口。
 - Pytest 单元测试和 GitHub Actions。
+
+## 页面预览
+
+![Gradio RAG 问答页面](docs/assets/gradio-rag-demo.png)
 
 ## 技术栈
 
@@ -42,6 +48,9 @@ local-llm-rag-qa-system/
 │   └── vector_store.py     # 向量检索
 ├── sample_data/
 │   └── demo_knowledge.md
+├── docs/
+│   └── assets/
+│       └── gradio-rag-demo.png
 ├── tests/
 ├── .env.example
 ├── requirements.txt
@@ -115,14 +124,3 @@ pytest
 ```
 
 测试覆盖文档加载、文本切分、向量检索和 RAG 编排。测试不依赖外部网络和 Ollama 服务。
-
-## 与简历项目对应关系
-
-| 简历描述 | 仓库实现 |
-| --- | --- |
-| 文档解析与文本切分 | `rag_qa/document_loader.py`、`rag_qa/text_splitter.py` |
-| HuggingFaceEmbeddings 向量化 | `rag_qa/embeddings.py` |
-| FAISS 语义检索 | `rag_qa/vector_store.py` |
-| Qwen/Ollama 本地模型 | `rag_qa/llm_client.py` |
-| RAG 检索增强生成 | `rag_qa/rag_chain.py` |
-| Gradio 交互页面 | `rag_qa/app.py` |
